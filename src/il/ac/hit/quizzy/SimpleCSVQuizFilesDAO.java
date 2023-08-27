@@ -1,0 +1,20 @@
+package il.ac.hit.quizzy;
+
+package il.ac.hit.quizzy;
+
+public class SimpleCSVQuizFilesDAO implements IQuizFilesDAO {
+    private static SimpleCSVQuizFilesDAO instance;
+
+    private SimpleCSVQuizFilesDAO() {
+        // Constructor implementation
+    }
+
+    public static synchronized SimpleCSVQuizFilesDAO getInstance() {
+        if (instance == null) {
+            instance = new SimpleCSVQuizFilesDAO();
+        }
+        return instance;
+    }
+
+    // Other methods implementation
+}
