@@ -10,13 +10,7 @@ public class TerminalQuiz implements IQuiz{
     @Override
     public void start() {
         System.out.println("Welcome to the Terminal Quiz: " + name);
-        int totalQuestions = questions.size();
-        int correctAnswers = 0;
 
-        double percentageCorrect = (double) correctAnswers / totalQuestions * 100;
-        System.out.println("Quiz ended. Here are your results:");
-        System.out.println("You answered " + correctAnswers + " out of " + totalQuestions + " questions correctly.");
-        System.out.println("Your score: " + percentageCorrect + "%");
     }
 
     @Override
@@ -36,6 +30,13 @@ public class TerminalQuiz implements IQuiz{
 
     @Override
     public void endQuiz() {
+        int totalQuestions = questions.size();
+        int correctAnswers = 0;
+
+        double percentageCorrect = (double) correctAnswers / totalQuestions * 100;
+        System.out.println("Quiz ended. Here are your results:");
+        System.out.println("You answered " + correctAnswers + " out of " + totalQuestions + " questions correctly.");
+        System.out.println("Your score: " + percentageCorrect + "%");
 
     }
 
