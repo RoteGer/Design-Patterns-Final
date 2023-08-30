@@ -1,71 +1,71 @@
 package il.ac.hit.quizzy;
-
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class QuizQuestion implements IQuizQuestion {
-    // Fields for holding question data
     private String title;
     private String question;
-    private List<String> answers;
-    private List<Boolean> correctAnswers;
+    private List<QuizAnswer> answerList = new LinkedList<>();
 
-    // Constructor (private to enforce Builder pattern)
-    private QuizQuestion() {
-        answers = new ArrayList<>();
-        correctAnswers = new ArrayList<>();
+
+    @Override
+    public void setTitle(String text) {
+        this.title = text;
     }
 
     @Override
-    public String getTitle() {
-        return null;
+    public void setQuestion(String text) {
+        this.question = text;
     }
 
     @Override
-    public String getQuestion() {
-        return null;
+    public void setAnswerList(List<QuizAnswer> answerList) {
+        this.answerList = answerList;
     }
 
     @Override
-    public List<String> getAnswers() {
-        return null;
-    }
-
-    @Override
-    public boolean getCorrectAnswers() {
-        return false;
-    }
-
-    public static class Builder implements IQuizQuestionBuilder{
-
-        private QuizQuestion question;
-
-        public Builder() {
-            question = new QuizQuestion();
+    public String toString() {
+        String text = title + "\n";
+        text += question + "\n";
+        for (QuizAnswer answer : answerList) {
+            text += answer.getQuestion() + ", " + answer.isCorrect();
+            text += "\n";
         }
+        return text;
+    }
+
+    public static class Builder implements IQuizQuestionBuilder {
+        String questionTitle;
+        String builderQuestion;
+
+        List<QuizAnswer> answers = new LinkedList<>();
+
         @Override
         public IQuizQuestionBuilder setTitle(String text) {
-            question.title = text;
+            questionTitle = text;
             return this;
         }
 
         @Override
         public IQuizQuestionBuilder setQuestion(String text) {
-            question.question = text;
+            builderQuestion = text;
             return this;
         }
 
         @Override
-        public IQuizQuestionBuilder addAnswer(String text, boolean correct) {
-            question.answers.add(text);
-            question.correctAnswers.add(correct);
+        public IQuizQuestionBuilder addAnswer(String text, boolean isCorrect) {
+            answers.add(new QuizAnswer(text, isCorrect));
             return this;
         }
 
         @Override
         public IQuizQuestion create() {
+            IQuizQuestion question = new QuizQuestion();
+            question.setTitle(questionTitle);
+            question.setQuestion(builderQuestion);
+            question.setAnswerList(answers);
+
             return question;
         }
     }
-
 }

@@ -3,8 +3,9 @@ package il.ac.hit.quizzy;
 import java.util.List;
 
 public interface IQuizQuestion {
-    public abstract String getTitle();
-    public abstract String getQuestion();
-    public abstract List<String> getAnswers();
-    public abstract boolean getCorrectAnswers();
+
+
+    public abstract void setAnswerList(List<QuizAnswer> answers);
+    public abstract void setTitle(String text);
+    public abstract void setQuestion(String text);
 }
