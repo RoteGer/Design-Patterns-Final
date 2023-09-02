@@ -6,7 +6,7 @@ public class QuizFactory {
             if (type == QuizType.TERMINAL) {
                 return new TerminalQuiz();
             } else if (type == QuizType.GUI) {
-                return new GuiQuiz();
+                //return new GuiQuiz();
             }
         }
         return null; // Handle unsupported quiz type

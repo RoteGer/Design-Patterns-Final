@@ -6,7 +6,7 @@ public class QuizQuestion implements IQuizQuestion {
     private String title;
     private String question;
     private List<QuizAnswer> answerList = new LinkedList<>();
-
+    private boolean correct;
 
     @Override
     public void setTitle(String text) {
@@ -25,19 +25,23 @@ public class QuizQuestion implements IQuizQuestion {
 
     @Override
     public String toString() {
-        String text = title + "\n";
-        text += question + "\n";
+        StringBuilder text = new StringBuilder(title + "\n");
+        text.append(question).append("\n");
         for (QuizAnswer answer : answerList) {
-            text += answer.getQuestion() + ", " + answer.isCorrect();
-            text += "\n";
+            text.append(answer.getQuestion()).append(", ").append(answer.isCorrect());
+            text.append("\n");
         }
-        return text;
+        return text.toString();
     }
 
+    public List<QuizAnswer> getOptions() {
+        return answerList;
+    }
+
+    // Question Builder
     public static class Builder implements IQuizQuestionBuilder {
         String questionTitle;
         String builderQuestion;
-
         List<QuizAnswer> answers = new LinkedList<>();
 
         @Override
