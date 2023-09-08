@@ -11,7 +11,7 @@ public class SimpleCSVQuizFilesDAO implements IQuizFilesDAO {
         // Constructor implementation
     }
 
-    public static synchronized SimpleCSVQuizFilesDAO getInstance() {
+    public static SimpleCSVQuizFilesDAO getInstance() {
         if (instance == null) {
             instance = new SimpleCSVQuizFilesDAO();
         }
@@ -23,25 +23,27 @@ public class SimpleCSVQuizFilesDAO implements IQuizFilesDAO {
         if (quiz == null) {
             throw new QuizException("Quiz object is null");
         }
+                try (FileWriter fileWriter = new FileWriter(fileName)) {
 
-        try (FileWriter fileWriter = new FileWriter(fileName)) {
-            // Write the quiz data to the CSV file
-            for (IQuizQuestion question : quiz.getQuestions()) {
-                StringBuilder line = new StringBuilder();
-                line.append(escapeCsvValue(question.toString())).append(",");
+                    // Write the quiz data to the CSV file
+                    for (IQuizQuestion question : quiz.getQuestions()) {
+                        StringBuilder line = new StringBuilder();
 
-                for (QuizAnswer option : question.getOptions()) {
-                    line.append(escapeCsvValue(option.toString())).append(",");
+                        line.append(escapeCsvValue(question.toString()));
+
+//                        for (QuizAnswer option : question.getOptions()) {
+//                            System.out.println(option);
+//                            line.append(escapeCsvValue(option.toString())).append(",");
+//                        }
+
+                       // line.append(question.getOptions());
+                        fileWriter.write(line.toString());
+                        fileWriter.write(System.lineSeparator());
+                    }
+                } catch (IOException e) {
+                    throw new QuizException("Error writing to file: " + e.getMessage());
                 }
-
-                line.append(question.getOptions());
-                fileWriter.write(line.toString());
-                fileWriter.write(System.lineSeparator());
             }
-        } catch (IOException e) {
-            throw new QuizException("Error writing to file: " + e.getMessage());
-        }
-    }
 
     private static String escapeCsvValue(String value) {
         if (value.contains(",") || value.contains("\"")) {

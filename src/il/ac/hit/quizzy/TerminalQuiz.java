@@ -56,3 +56,4 @@ public class TerminalQuiz implements IQuiz{
         return clonedQuiz;
     }
 }
+

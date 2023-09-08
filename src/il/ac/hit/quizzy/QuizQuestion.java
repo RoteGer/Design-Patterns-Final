@@ -1,16 +1,26 @@
 package il.ac.hit.quizzy;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class QuizQuestion implements IQuizQuestion {
     private String title;
     private String question;
+    private List<IQuizQuestion> questions = new ArrayList<>();
     private List<QuizAnswer> answerList = new LinkedList<>();
     private boolean correct;
 
     @Override
     public void setTitle(String text) {
         this.title = text;
+    }
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
+    public List<IQuizQuestion> getQuestions() {
+        return questions;
     }
 
     @Override

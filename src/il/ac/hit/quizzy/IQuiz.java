@@ -11,7 +11,6 @@ public interface IQuiz {
     public abstract void addQuestion(IQuizQuestion question);
     public abstract void endQuiz();
     IQuiz clone(); // Prototype method
-
 }
 
 

@@ -8,4 +8,7 @@ public interface IQuizQuestion {
     public abstract void setTitle(String text);
     public abstract void setQuestion(String text);
     public abstract List<QuizAnswer> getOptions();
+    public abstract String getTitle();
+    public abstract List<IQuizQuestion> getQuestions();
+
 }
