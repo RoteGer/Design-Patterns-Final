@@ -20,38 +20,21 @@ public class SimpleCSVQuizFilesDAO implements IQuizFilesDAO {
 
     @Override
     public void saveQuizToFile(IQuiz quiz, String fileName) throws QuizException {
-        if (quiz == null) {
-            throw new QuizException("Quiz object is null");
-        }
-                try (FileWriter fileWriter = new FileWriter(fileName)) {
+        try {
+            FileWriter writer = new FileWriter(fileName + ".csv");  // Save the quiz's type
+            List<IQuizQuestion> questions = quiz.getQuestions();
+            writer.write(quiz.getClass().toString() + "\n");
+            writer.write(quiz.getName() + "\n");  // Save the quiz's name
 
-                    // Write the quiz data to the CSV file
-                    for (IQuizQuestion question : quiz.getQuestions()) {
-                        StringBuilder line = new StringBuilder();
-
-                        line.append(escapeCsvValue(question.toString()));
-
-//                        for (QuizAnswer option : question.getOptions()) {
-//                            System.out.println(option);
-//                            line.append(escapeCsvValue(option.toString())).append(",");
-//                        }
-
-                       // line.append(question.getOptions());
-                        fileWriter.write(line.toString());
-                        fileWriter.write(System.lineSeparator());
-                    }
-                } catch (IOException e) {
-                    throw new QuizException("Error writing to file: " + e.getMessage());
-                }
+            for (IQuizQuestion question : questions) {  // Save the questions
+                writer.write(question.toString());
             }
+            writer.close();
+        } catch (IOException e) {
 
-    private static String escapeCsvValue(String value) {
-        if (value.contains(",") || value.contains("\"")) {
-            value = "\"" + value.replace("\"", "\"\"") + "\"";
+            throw new QuizException("File not saved");
         }
-        return value;
     }
-
 
     @Override
     public IQuiz loadQuizFromFile(String fileName) throws QuizException {
