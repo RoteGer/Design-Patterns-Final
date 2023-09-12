@@ -27,7 +27,6 @@ public class SimpleCSVQuizFilesDAO implements IQuizFilesDAO {
             List<IQuizQuestion> questions = quiz.getQuestions();
             fileWriter.write(quiz.getClass().toString() + "\n");
             fileWriter.write(quiz.getName() + "\n");  // Save the quiz's name
-
             for (IQuizQuestion question : questions) {  // Save the questions
                 fileWriter.write(question.toString());
             }

@@ -1,4 +1,5 @@
 package il.ac.hit.quizzy;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,6 +15,7 @@ public class QuizQuestion implements IQuizQuestion {
     public void setTitle(String text) {
         this.title = text;
     }
+
     public String getTitle() {
         return title;
     }
