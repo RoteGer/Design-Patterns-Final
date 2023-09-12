@@ -3,15 +3,16 @@ package il.ac.hit.quizzy;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TerminalQuiz implements IQuiz{
+public class TerminalQuiz implements IQuiz {
     // Implementation for terminal-based quiz
     private String name;
     private int correctAnswers;
+    private final String type = "TERMINAL";
     private List<IQuizQuestion> questions = new ArrayList<>();
+
     @Override
     public void start() {
         System.out.println("Welcome to the Terminal Quiz: " + name);
-
     }
 
     @Override
@@ -30,7 +31,9 @@ public class TerminalQuiz implements IQuiz{
     }
 
     @Override
-    public void addQuestion(IQuizQuestion question) { questions.add(question); }
+    public void addQuestion(IQuizQuestion question) {
+        questions.add(question);
+    }
 
 
     @Override
@@ -46,6 +49,11 @@ public class TerminalQuiz implements IQuiz{
 
     @Override
     public IQuiz clone() {
+        try {
+            IQuiz clone = (IQuiz) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
         // Implement the clone logic for TerminalQuiz
         // Return a new instance with copied properties
         TerminalQuiz clonedQuiz = new TerminalQuiz();
