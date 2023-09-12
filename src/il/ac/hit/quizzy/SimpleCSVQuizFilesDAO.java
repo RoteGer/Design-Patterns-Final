@@ -21,15 +21,15 @@ public class SimpleCSVQuizFilesDAO implements IQuizFilesDAO {
     @Override
     public void saveQuizToFile(IQuiz quiz, String fileName) throws QuizException {
         try {
-            FileWriter writer = new FileWriter(fileName + ".csv");  // Save the quiz's type
+            FileWriter fileWriter = new FileWriter(fileName + ".csv");  // Save the quiz's type
             List<IQuizQuestion> questions = quiz.getQuestions();
-            writer.write(quiz.getClass().toString() + "\n");
-            writer.write(quiz.getName() + "\n");  // Save the quiz's name
+            fileWriter.write(quiz.getClass().toString() + "\n");
+            fileWriter.write(quiz.getName() + "\n");  // Save the quiz's name
 
             for (IQuizQuestion question : questions) {  // Save the questions
-                writer.write(question.toString());
+                fileWriter.write(question.toString());
             }
-            writer.close();
+            fileWriter.close();
         } catch (IOException e) {
 
             throw new QuizException("File not saved");
