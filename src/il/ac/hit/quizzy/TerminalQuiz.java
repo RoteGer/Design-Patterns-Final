@@ -48,20 +48,14 @@ public class TerminalQuiz implements IQuiz {
     }
 
     @Override
-    public IQuiz clone() {
+    public IQuiz clone() throws CloneNotSupportedException {
+        Object clone = null;
         try {
-            IQuiz clone = (IQuiz) super.clone();
+            clone = super.clone();
         } catch (CloneNotSupportedException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
-        // Implement the clone logic for TerminalQuiz
-        // Return a new instance with copied properties
-        TerminalQuiz clonedQuiz = new TerminalQuiz();
-        clonedQuiz.name = this.name;
-        for (IQuizQuestion question : this.questions) {
-            clonedQuiz.questions.add((QuizQuestion) question);
-        }
-        return clonedQuiz;
+        return (IQuiz) clone;
     }
 }
 
