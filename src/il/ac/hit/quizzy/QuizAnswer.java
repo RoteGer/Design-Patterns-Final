@@ -1,13 +1,19 @@
 package il.ac.hit.quizzy;
 
 // Holds data (record class)
-public class QuizAnswer {
+public class QuizAnswer implements IQuizAnswer {
     private String question;
     private boolean correct;
+    private String answer;
 
     public QuizAnswer(String question, boolean isCorrect) {
         setQuestion(question);
         setCorrect(isCorrect);
+    }
+
+    @Override
+    public String getAnswer() {
+        return answer;
     }
 
     public boolean isCorrect() {
@@ -18,14 +24,13 @@ public class QuizAnswer {
         this.correct = correct;
     }
 
-    public String getQuestion() {
-        return question;
-    }
 
     public void setQuestion(String question) {
         this.question = question;
     }
 
 
-
+    public String getQuestion() {
+        return question;
+    }
 }

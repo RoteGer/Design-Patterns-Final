@@ -1,28 +1,20 @@
 package il.ac.hit.quizzy;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class QuizQuestion implements IQuizQuestion {
     private String title;
     private String question;
-    private List<IQuizQuestion> questions = new ArrayList<>();
     private List<QuizAnswer> answerList = new LinkedList<>();
-    private boolean correct;
+
+    public void setAnswerList(List<QuizAnswer> answerList) {
+        this.answerList = answerList;
+    }
 
     @Override
     public void setTitle(String text) {
         this.title = text;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    @Override
-    public List<IQuizQuestion> getQuestions() {
-        return questions;
     }
 
     @Override
@@ -30,10 +22,27 @@ public class QuizQuestion implements IQuizQuestion {
         this.question = text;
     }
 
-    @Override
-    public void setAnswerList(List<QuizAnswer> answerList) {
-        this.answerList = answerList;
+    public String getTitle() {
+        return title;
     }
+
+    @Override
+    public String[] getOptions() {
+        int i = 0;
+        String[] answerStrArr = new String[answerList.size()]; // Initialize the array with the appropriate size
+        for (QuizAnswer answer : answerList) {
+            answerStrArr[i] = (answer.getQuestion());
+            i++;
+        }
+
+        return answerStrArr;
+    }
+
+    @Override
+    public boolean isUserCorrect(int markedOption) {
+        return answerList.get(markedOption).isCorrect();
+    }
+
 
     @Override
     public String toString() {
@@ -43,12 +52,15 @@ public class QuizQuestion implements IQuizQuestion {
             text.append(answer.getQuestion()).append(", ").append(answer.isCorrect());
             text.append("\n");
         }
+
         return text.toString();
     }
 
-    public List<QuizAnswer> getOptions() {
-        return answerList;
+    @Override
+    public String getQuestion() {
+        return question;
     }
+
 
     // Question Builder
     public static class Builder implements IQuizQuestionBuilder {

@@ -5,10 +5,17 @@ import java.util.List;
 public interface IQuizQuestion {
 
     public abstract void setAnswerList(List<QuizAnswer> answers);
+
     public abstract void setTitle(String text);
+
     public abstract void setQuestion(String text);
-    public abstract List<QuizAnswer> getOptions();
+
+    public abstract String[] getOptions();
+
+    public abstract boolean isUserCorrect(int markedOption);
+
     public abstract String getTitle();
-    public abstract List<IQuizQuestion> getQuestions();
+
+    public abstract String getQuestion();
 
 }
