@@ -39,17 +39,19 @@ public class SimpleCSVQuizFilesDAO implements IQuizFilesDAO {
 
     @Override
     public IQuiz loadQuizFromFile(String fileName) throws QuizException {
+        int i = 0;
+        int count = 0;
         String data; // Holds csv line
         String answer;
+        File file = new File(fileName + ".csv");
         IQuizQuestion question;
         List<IQuizQuestionBuilder> builder = new ArrayList<>(); // A list of builders. each builder will hold a question
-        int i = 0;
         builder.add(new QuizQuestion.Builder()); // First builder
-        int count = 0;
-        File file = new File(fileName + ".csv");
         try {
             Scanner scanner = new Scanner(file);
             String lowerCaseText = scanner.nextLine().toLowerCase();
+
+            // LowerCase for letter sensitivity
             boolean containsTerminal = lowerCaseText.contains("terminal");
             boolean containsGui = lowerCaseText.contains("gui");
             String quizTypeStr;
@@ -92,8 +94,6 @@ public class SimpleCSVQuizFilesDAO implements IQuizFilesDAO {
                         builder.get(i).addAnswer(trimmeData, answer.equals("true")); // if true gives true else gives false
                     }
                 }
-
-
                 count++;
 
                 // finished parsing 1 question
