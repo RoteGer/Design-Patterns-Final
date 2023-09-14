@@ -20,6 +20,7 @@ public class SimpleCSVQuizFilesDAO implements IQuizFilesDAO {
         return instance;
     }
 
+    // Save a quiz to a CSV file
     @Override
     public void saveQuizToFile(IQuiz quiz, String fileName) throws QuizException {
         try {
@@ -32,11 +33,11 @@ public class SimpleCSVQuizFilesDAO implements IQuizFilesDAO {
             }
             fileWriter.close();
         } catch (IOException e) {
-
             throw new QuizException("File not saved");
         }
     }
 
+    // Load a quiz from a CSV file
     @Override
     public IQuiz loadQuizFromFile(String fileName) throws QuizException {
         int i = 0;
@@ -45,7 +46,7 @@ public class SimpleCSVQuizFilesDAO implements IQuizFilesDAO {
         String answer;
         File file = new File(fileName + ".csv");
         IQuizQuestion question;
-        List<IQuizQuestionBuilder> builder = new ArrayList<>(); // A list of builders. each builder will hold a question
+        List<IQuizQuestionBuilder> builder = new ArrayList<>(); // A list of builders, each builder will hold a question
         builder.add(new QuizQuestion.Builder()); // First builder
         try {
             Scanner scanner = new Scanner(file);
@@ -56,7 +57,7 @@ public class SimpleCSVQuizFilesDAO implements IQuizFilesDAO {
             boolean containsGui = lowerCaseText.contains("gui");
             String quizTypeStr;
 
-            // Getting the QuizType from the first line in the csv
+            // Getting the QuizType from the first line in the CSV
             if (containsTerminal) {
                 quizTypeStr = "TERMINAL";
             } else if (containsGui) {
@@ -72,31 +73,32 @@ public class SimpleCSVQuizFilesDAO implements IQuizFilesDAO {
             QuizFactory factory = new QuizFactory();
             IQuiz quiz = factory.createQuiz(quizType);
 
-            quiz.setName(scanner.nextLine()); // Setting the quiz name from the csv
+            // Setting the quiz name from the CSV
+            quiz.setName(scanner.nextLine());
 
             while (scanner.hasNextLine()) {
                 data = scanner.nextLine();
 
                 // Configure the builder of quizQuestion,
-                // it is assumed each question has: title, question, and 5 answers options in this order
+                // it is assumed each question has: title, question, and 5 answer options in this order
                 if (count == 0) {  // Question's title
                     builder.get(i).setTitle(data);
                 } else if (count == 1) {  // Question
                     builder.get(i).setQuestion(data);
-                } else {  // Answers Options. count = 2-7
+                } else {  // Answer Options. count = 2-7
                     if (!data.isEmpty()) {
                         answer = "false";  // Default
-                        String trimmeData = data;
+                        String trimmedData = data;
                         if (data.indexOf(',') != -1) {  // Removing true and false
-                            trimmeData = data.substring(0, data.indexOf(',')).trim();
+                            trimmedData = data.substring(0, data.indexOf(',')).trim();
                             answer = data.substring(data.indexOf(',') + 1).trim();
                         }
-                        builder.get(i).addAnswer(trimmeData, answer.equals("true")); // if true gives true else gives false
+                        builder.get(i).addAnswer(trimmedData, answer.equals("true")); // if true gives true else gives false
                     }
                 }
                 count++;
 
-                // finished parsing 1 question
+                // Finished parsing 1 question
                 if (count == 7) {
                     // Create the builder after the configuration
                     question = builder.get(i).create();
