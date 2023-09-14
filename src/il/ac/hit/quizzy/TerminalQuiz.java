@@ -6,12 +6,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TerminalQuiz implements IQuiz {
+
     // Implementation for terminal-based quiz
     private String name;
-    private int correctAnswers;
     List<Integer> inputOptions = Arrays.asList(1, 2, 3, 4, 5);
-    private Boolean answer;
-    private final String type = "TERMINAL";
     private List<IQuizQuestion> questions = new ArrayList<>();
     private int score = 0;
     public ArrayList<String> questionsArr = new ArrayList<String>();
@@ -23,7 +21,6 @@ public class TerminalQuiz implements IQuiz {
     @Override
     public void start() {
         System.out.println("Welcome to the Terminal Quiz: " + name);
-        // System.out.println(getQuestionsStr());
         play();
     }
 
@@ -38,23 +35,6 @@ public class TerminalQuiz implements IQuiz {
     @Override
     public String getName() {
         return name;
-    }
-
-    // This function assumes that only questions of the quiz has a question mark
-    public ArrayList<String> getQuestion() {
-        int i = 0;
-        // Split the input string into lines
-        String[] lines = questions.toString().split("\n"); // Use "\r\n" for Windows line endings
-
-        // Loop through each line
-        for (String line : lines) {
-            if (line.contains("?")) {
-                questionsArr.add(line);
-                i++;
-            }
-        }
-
-        return questionsArr;
     }
 
     @Override
