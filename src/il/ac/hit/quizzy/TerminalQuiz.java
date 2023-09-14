@@ -27,7 +27,7 @@ public class TerminalQuiz implements IQuiz {
     @Override
     public void setName(String text) {
         if (text == null) {
-            this.name = "default name";
+            this.name = "Default Name";
         } else {
             this.name = text;
         }

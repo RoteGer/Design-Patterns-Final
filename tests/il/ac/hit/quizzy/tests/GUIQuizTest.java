@@ -16,7 +16,7 @@ public class GUIQuizTest {
         // Create the QuizFactory and the GUIQuiz instance
         QuizFactory factory = new QuizFactory();
         guiQuiz = factory.createQuiz(QuizType.GUI);
-        guiQuiz.setName("Quiz Test");
+        guiQuiz.setName("Quiz Test GUI");
 
         // Create a sample question and add it to the guiQuiz
         IQuizQuestionBuilder builderTest = new QuizQuestion.Builder();
@@ -46,8 +46,8 @@ public class GUIQuizTest {
     @Test
     public void testGetName() {
 
-        // "Quiz Test" was set in the setUp method
-        assertEquals("Quiz Test", guiQuiz.getName());
+        // "Quiz Test GUI" was set in the setUp method
+        assertEquals("Quiz Test GUI", guiQuiz.getName());
     }
 
     @Test
