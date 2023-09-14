@@ -14,7 +14,11 @@ public class QuizQuestion implements IQuizQuestion {
 
     @Override
     public void setTitle(String text) {
-        this.title = text;
+        if (text != null && !text.trim().isEmpty()) {
+            this.title = text;
+        } else {
+            throw new IllegalArgumentException("Title cannot be empty");
+        }
     }
 
     @Override
@@ -31,7 +35,7 @@ public class QuizQuestion implements IQuizQuestion {
         int i = 0;
         String[] answerStrArr = new String[answerList.size()]; // Initialize the array with the appropriate size
         for (QuizAnswer answer : answerList) {
-            answerStrArr[i] = (answer.getQuestion());
+            answerStrArr[i] = answer.getQuestion();
             i++;
         }
 
@@ -63,22 +67,26 @@ public class QuizQuestion implements IQuizQuestion {
 
     // Question Builder
     public static class Builder implements IQuizQuestionBuilder {
+        // Properties to hold the components of a quiz question
         String questionTitle;
         String builderQuestion;
         List<QuizAnswer> answers = new LinkedList<>();
 
+        // Setter for the title of the quiz question
         @Override
         public IQuizQuestionBuilder setTitle(String text) {
             questionTitle = text;
             return this;
         }
 
+        // Setter for the question text of the quiz question
         @Override
         public IQuizQuestionBuilder setQuestion(String text) {
             builderQuestion = text;
             return this;
         }
 
+        // Method to add an answer option to the quiz question
         @Override
         public IQuizQuestionBuilder addAnswer(String text, boolean isCorrect) {
             answers.add(new QuizAnswer(text, isCorrect));
@@ -89,6 +97,8 @@ public class QuizQuestion implements IQuizQuestion {
         @Override
         public IQuizQuestion create() {
             IQuizQuestion question = new QuizQuestion();
+
+            // Set the title, question text, and answer options for the quiz question
             question.setTitle(questionTitle);
             question.setQuestion(builderQuestion);
             question.setAnswerList(answers);

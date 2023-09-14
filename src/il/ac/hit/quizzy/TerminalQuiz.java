@@ -1,7 +1,6 @@
 package il.ac.hit.quizzy;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,27 +8,28 @@ public class TerminalQuiz implements IQuiz {
 
     // Implementation for terminal-based quiz
     private String name;
-    List<Integer> inputOptions = Arrays.asList(1, 2, 3, 4, 5);
     private List<IQuizQuestion> questions = new ArrayList<>();
     private int score = 0;
 
     public TerminalQuiz() {
+        setName(name); // Use the setter to initialize name
     }
 
     // Start the terminal-based quiz
     @Override
     public void start() {
-        System.out.println("Welcome to the Terminal Quiz: " + name);
+        System.out.println("\n" + "Welcome to the Terminal Quiz: " + name + "\n");
         play();
     }
 
     // Set the name for the quiz
     @Override
     public void setName(String text) {
-        if (text.isEmpty()) {
-            text = "default name";
+        if (text == null) {
+            this.name = "default name";
+        } else {
+            this.name = text;
         }
-        this.name = text;
     }
 
     // Get the name of the quiz
@@ -57,7 +57,9 @@ public class TerminalQuiz implements IQuiz {
 
     // Add a quiz question to the list
     public void addQuestion(IQuizQuestion question) {
-        questions.add(question);
+        if (question != null) {
+            questions.add(question);
+        }
     }
 
     // Get the current quiz score
@@ -74,6 +76,7 @@ public class TerminalQuiz implements IQuiz {
 
     // Play the terminal quiz
     private void play() {
+        score = 0;
         for (IQuizQuestion question : questions) {
             boolean validInput = false;
             int usersInput = -1;
@@ -90,11 +93,11 @@ public class TerminalQuiz implements IQuiz {
             scanner = new Scanner(System.in);
 
             while (!validInput) {
-                System.out.println("\n\n<< Choose an answer between 1 to " + inputOptions.size() + " >>>");
+                System.out.println("\n\n<< Choose an answer between 1 to " + question.getOptions().length + " >>>");
                 try {
                     usersInput = scanner.nextInt();
                     scanner.nextLine();
-                    if (!inputOptions.contains(usersInput)) {
+                    if (usersInput < 1 || usersInput > question.getOptions().length) {
                         System.out.println("Number not in options. Try again.");
                     } else {
                         validInput = true;

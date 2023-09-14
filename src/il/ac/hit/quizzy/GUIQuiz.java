@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GuiQuiz implements IQuiz {
+public class GUIQuiz implements IQuiz {
 
     // Class-level variables
     private String name;
@@ -23,8 +23,8 @@ public class GuiQuiz implements IQuiz {
     private JLabel scoreLabel;
 
     // Constructor
-    public GuiQuiz() {
-        //initializeUI(); // Commented out for manual UI initialization
+    public GUIQuiz() {
+        setName(name); // Use the setter to initialize name
     }
 
     // Initialize the graphical user interface
@@ -94,10 +94,11 @@ public class GuiQuiz implements IQuiz {
     // Set the name for the quiz
     @Override
     public void setName(String text) {
-        if (text.isEmpty()) {
-            text = "default name";
+        if (name == null) {
+            this.name = "Default Name";
+        } else {
+            this.name = text;
         }
-        this.name = text;
     }
 
     // Get the name of the quiz
@@ -114,7 +115,9 @@ public class GuiQuiz implements IQuiz {
 
     // Add a quiz question to the list
     public void addQuestion(IQuizQuestion question) {
-        questions.add(question);
+        if (question != null) {
+            questions.add(question);
+        }
     }
 
     // Update the score label displayed in the GUI
@@ -190,12 +193,12 @@ public class GuiQuiz implements IQuiz {
         }
     }
 
-    // Clone the GuiQuiz instance
+    // Clone the GUIQuiz instance
     @Override
     public IQuiz clone() {
-        GuiQuiz clonedQuiz = null;
+        GUIQuiz clonedQuiz = null;
         try {
-            clonedQuiz = (GuiQuiz) super.clone();
+            clonedQuiz = (GUIQuiz) super.clone();
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }

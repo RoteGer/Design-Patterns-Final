@@ -6,7 +6,7 @@ public class QuizFactory {
 
     public QuizFactory() {
         // Initialize prototypes
-        guiQuizPrototype = new GuiQuiz();
+        guiQuizPrototype = new GUIQuiz();
         terminalQuizPrototype = new TerminalQuiz();
     }
 
