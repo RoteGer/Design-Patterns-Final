@@ -43,7 +43,7 @@ public class QuizQuestion implements IQuizQuestion {
         return answerList.get(markedOption).isCorrect();
     }
 
-
+    // Converts the QuizQuestion object to a string for saving to a CSV file
     @Override
     public String toString() {
         StringBuilder text = new StringBuilder(title + "\n");
@@ -60,7 +60,6 @@ public class QuizQuestion implements IQuizQuestion {
     public String getQuestion() {
         return question;
     }
-
 
     // Question Builder
     public static class Builder implements IQuizQuestionBuilder {
@@ -86,6 +85,7 @@ public class QuizQuestion implements IQuizQuestion {
             return this;
         }
 
+        // Creates a QuizQuestion object based on the builder's configuration
         @Override
         public IQuizQuestion create() {
             IQuizQuestion question = new QuizQuestion();

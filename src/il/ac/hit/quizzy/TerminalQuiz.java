@@ -133,8 +133,7 @@ public class TerminalQuiz implements IQuiz {
         String playAgainChoice = playAgain.nextLine().trim(); // Read user input and remove leading/trailing spaces
         if ("yes".equalsIgnoreCase(playAgainChoice)) { // Use equalsIgnoreCase for case-insensitive comparison
             play();
-        }
-        else {
+        } else {
             System.out.println("\nOkay. Goodbye.");
         }
 

@@ -26,7 +26,7 @@ public class QuizFactory {
             if (type == QuizType.TERMINAL) {
                 return cloneQuiz(terminalQuizPrototype);
             } else if (type == QuizType.GUI) {
-                //return cloneQuiz(GuiQuiz());
+                return cloneQuiz(guiQuizPrototype);
             }
         }
         return null; // Handle unsupported quiz type

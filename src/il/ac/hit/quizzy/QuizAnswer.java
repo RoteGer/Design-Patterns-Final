@@ -11,11 +11,6 @@ public class QuizAnswer implements IQuizAnswer {
         setCorrect(isCorrect);
     }
 
-    @Override
-    public String getAnswer() {
-        return answer;
-    }
-
     public boolean isCorrect() {
         return correct;
     }
