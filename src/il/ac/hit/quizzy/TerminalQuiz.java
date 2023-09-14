@@ -12,8 +12,6 @@ public class TerminalQuiz implements IQuiz {
     List<Integer> inputOptions = Arrays.asList(1, 2, 3, 4, 5);
     private List<IQuizQuestion> questions = new ArrayList<>();
     private int score = 0;
-    public ArrayList<String> questionsArr = new ArrayList<String>();
-    ;
 
     public TerminalQuiz() {
     }
