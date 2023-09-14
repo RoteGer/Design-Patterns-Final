@@ -13,7 +13,7 @@ public class QuizFactory {
     private IQuiz cloneQuiz(IQuiz quizPrototype) {
         // Create a new instance
         try {
-            return (IQuiz) quizPrototype.clone();
+            return quizPrototype.clone();
         } catch (CloneNotSupportedException e) {
 
             e.printStackTrace();

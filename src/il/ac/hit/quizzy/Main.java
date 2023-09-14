@@ -5,7 +5,7 @@ public class Main {
     public static void main(String argos[]) throws QuizException {
         //creating question
         QuizFactory factory = new QuizFactory();
-        IQuiz quiz = factory.createQuiz(QuizType.TERMINAL);
+        IQuiz quiz = factory.createQuiz(QuizType.GUI);
         quiz.setName("Quiz Demo");
         //creating 1st question 
         IQuizQuestionBuilder builder1 = new QuizQuestion.Builder();
