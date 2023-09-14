@@ -47,12 +47,15 @@ public class TerminalQuiz implements IQuiz {
 
     // Display terminal options for a given question
     private void terminalOptions(IQuizQuestion question) {
-        int i = 1;
 
-        // Get each option from String array
-        for (String option : question.getOptions()) {
-            System.out.println(i + ") " + option);
-            i++;
+        if (question != null) {
+            int i = 1;
+
+            // Get each option from String array
+            for (String option : question.getOptions()) {
+                System.out.println(i + ") " + option);
+                i++;
+            }
         }
     }
 

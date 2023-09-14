@@ -160,8 +160,13 @@ public class GUIQuiz implements IQuiz {
 
     // Check if the selected option is correct and update the score
     private void checkAnswer(int selectedOption) {
-        IQuizQuestion question = questions.get(currentQuestionIndex);
 
+        // Validation
+        if (selectedOption < 0) {
+            throw new IllegalArgumentException("Invalid selected option");
+        }
+
+        IQuizQuestion question = questions.get(currentQuestionIndex);
         if (question.isUserCorrect(selectedOption)) {
             score++;
         }
@@ -181,17 +186,21 @@ public class GUIQuiz implements IQuiz {
     @Override
     public void endQuiz() {
         double percentageCorrect = (double) score / questions.size() * 100;
-        JOptionPane.showMessageDialog(null, "Quiz ended. Here are your results:\n" +
-                "You answered " + score + " out of " + questions.size() + " questions correctly.\n" +
-                "Your score: " + percentageCorrect + "%");
+        if (frame != null) {
+            JOptionPane.showMessageDialog(frame, "Quiz ended. Here are your results:\n" +
+                    "You answered " + score + " out of " + questions.size() + " questions correctly.\n" +
+                    "Your score: " + percentageCorrect + "%");
 
-        frame.dispose();
+            frame.dispose();
+        }
+
         int playAgain = JOptionPane.showConfirmDialog(null, "Do you want to play again?", "Play Again", JOptionPane.YES_NO_OPTION);
         if (playAgain == JOptionPane.YES_OPTION) {
-            // If user wants to play again, so start the quiz again.
+            // If the user wants to play again, start the quiz again.
             start();
         }
     }
+
 
     // Clone the GUIQuiz instance
     @Override
