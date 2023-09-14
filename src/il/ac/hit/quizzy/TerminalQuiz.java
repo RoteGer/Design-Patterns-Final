@@ -88,25 +88,24 @@ public class TerminalQuiz implements IQuiz {
                     usersInput = scanner.nextInt();
                     scanner.nextLine();
                     if (!inputOptions.contains(usersInput)) {
-                        System.out.println("Invalid input. Try again");
+                        System.out.println("Number not in options. Try again.");
                     } else {
                         validInput = true;
                         if (question.isUserCorrect(usersInput - 1)) {
-                            System.out.println("Correct! \n\n");
+                            System.out.println("Correct!!!! \n\n");
                             setScore(getScore() + 1);
                         } else {
-                            System.out.println("False! \n\n");
+                            System.out.println("False!!!! \n\n");
                         }
                     }
 
                 } catch (Exception e) {
-                    System.out.println("Enter new answer.");
+                    System.out.println("Invalid input. Try again.");
                     scanner.nextLine();
                 }
             }
-
-
         }
+
         System.out.println("Do you want to play again? Write YES if you do");
         Scanner playAgain = new Scanner(System.in);
         String playAgainChoice = playAgain.nextLine().trim(); // Read user input and remove leading/trailing spaces        if ("yes".equals(playAgain.toString()))
@@ -121,7 +120,6 @@ public class TerminalQuiz implements IQuiz {
     @Override
     public void endQuiz() {
         int totalQuestions = questions.size();
-
         double percentageCorrect = (double) score / totalQuestions * 100;
         System.out.println("Quiz ended. Here are your results: ");
         System.out.println("You answered " + score + " out of " + totalQuestions + " questions correctly.");
@@ -130,14 +128,15 @@ public class TerminalQuiz implements IQuiz {
     }
 
     @Override
-    public IQuiz clone() throws CloneNotSupportedException {
-        Object clone = null;
+    public IQuiz clone() {
+        TerminalQuiz clonedQuiz = null;
         try {
-            clone = super.clone();
+            clonedQuiz = (TerminalQuiz) super.clone();
         } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return (IQuiz) clone;
+        clonedQuiz.questions = new ArrayList<>(this.questions);
+        return clonedQuiz;
     }
 }
 
