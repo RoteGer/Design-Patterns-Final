@@ -113,15 +113,10 @@ public class TerminalQuiz implements IQuiz {
             }
         }
 
-        System.out.println("Do you want to play again? Write YES if you do");
-        Scanner playAgain = new Scanner(System.in);
-        String playAgainChoice = playAgain.nextLine().trim(); // Read user input and remove leading/trailing spaces
-        if ("yes".equalsIgnoreCase(playAgainChoice)) { // Use equalsIgnoreCase for case-insensitive comparison
-            play();
-        } else {
-            System.out.println("Thanks for playing. \n\n");
-            endQuiz();
-        }
+
+        System.out.println("Thanks for playing. \n");
+        endQuiz();
+
     }
 
     // End the terminal quiz and display results
@@ -132,6 +127,17 @@ public class TerminalQuiz implements IQuiz {
         System.out.println("Quiz ended. Here are your results: ");
         System.out.println("You answered " + score + " out of " + totalQuestions + " questions correctly.");
         System.out.println("Your score: " + percentageCorrect + "%");
+
+        System.out.println("\n\nDo you want to play again? Write YES if you do");
+        Scanner playAgain = new Scanner(System.in);
+        String playAgainChoice = playAgain.nextLine().trim(); // Read user input and remove leading/trailing spaces
+        if ("yes".equalsIgnoreCase(playAgainChoice)) { // Use equalsIgnoreCase for case-insensitive comparison
+            play();
+        }
+        else {
+            System.out.println("\nOkay. Goodbye.");
+        }
+
     }
 
     // Clone the TerminalQuiz instance
