@@ -30,7 +30,7 @@ public class GUIQuiz implements IQuiz {
     // Set the name for the quiz
     @Override
     public void setName(String text) {
-        if (name == null) {
+        if (text == null) {
             this.name = "Default Name";
         } else {
             this.name = text;
