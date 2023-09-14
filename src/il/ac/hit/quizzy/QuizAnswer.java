@@ -2,6 +2,8 @@ package il.ac.hit.quizzy;
 
 // Holds data (record class)
 public class QuizAnswer implements IQuizAnswer {
+
+    // Variable declarations
     private String question;  // The text of the answer option
     private boolean correct;  // Indicates whether the answer is correct or not
 
@@ -9,11 +11,6 @@ public class QuizAnswer implements IQuizAnswer {
     public QuizAnswer(String question, boolean isCorrect) {
         setQuestion(question);  // Initialize the answer text using the setter
         setCorrect(isCorrect);  // Initialize the correctness flag using the setter
-    }
-
-    // Getter method to check if the answer is correct
-    public boolean isCorrect() {
-        return correct;
     }
 
     // Setter method to set the correctness of the answer
@@ -35,6 +32,12 @@ public class QuizAnswer implements IQuizAnswer {
             throw new IllegalArgumentException("Question cannot be empty or null");
         }
     }
+
+    // Getter method to check if the answer is correct
+    public boolean isCorrect() {
+        return correct;
+    }
+
 
     // Getter method to retrieve the text of the answer option
     public String getQuestion() {

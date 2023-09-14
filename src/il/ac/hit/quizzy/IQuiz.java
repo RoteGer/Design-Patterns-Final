@@ -17,6 +17,3 @@ public interface IQuiz extends Cloneable {
 
     IQuiz clone() throws CloneNotSupportedException;  // Prototype method
 }
-
-
-

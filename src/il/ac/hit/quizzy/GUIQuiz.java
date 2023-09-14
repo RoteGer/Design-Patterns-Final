@@ -27,6 +27,22 @@ public class GUIQuiz implements IQuiz {
         setName(name); // Use the setter to initialize name
     }
 
+    // Set the name for the quiz
+    @Override
+    public void setName(String text) {
+        if (name == null) {
+            this.name = "Default Name";
+        } else {
+            this.name = text;
+        }
+    }
+
+    // Get the name of the quiz
+    @Override
+    public String getName() {
+        return name;
+    }
+
     // Initialize the graphical user interface
     private void initializeUI() {
         frame = new JFrame("GUI Quiz: " + name);
@@ -89,22 +105,6 @@ public class GUIQuiz implements IQuiz {
             JOptionPane.showMessageDialog(null, "No questions available.");
             endQuiz();
         }
-    }
-
-    // Set the name for the quiz
-    @Override
-    public void setName(String text) {
-        if (name == null) {
-            this.name = "Default Name";
-        } else {
-            this.name = text;
-        }
-    }
-
-    // Get the name of the quiz
-    @Override
-    public String getName() {
-        return name;
     }
 
     // Get the list of quiz questions

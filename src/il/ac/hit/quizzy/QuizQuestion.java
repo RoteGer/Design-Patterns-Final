@@ -4,14 +4,18 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class QuizQuestion implements IQuizQuestion {
+
+    // Variable declarations
     private String title;
     private String question;
     private List<QuizAnswer> answerList = new LinkedList<>();
 
+    // Setter for answer list
     public void setAnswerList(List<QuizAnswer> answerList) {
         this.answerList = answerList;
     }
 
+    // Setter for the title of the quiz question
     @Override
     public void setTitle(String text) {
         if (text != null && !text.trim().isEmpty()) {
@@ -21,15 +25,18 @@ public class QuizQuestion implements IQuizQuestion {
         }
     }
 
+    // Setter for the question text of the quiz question
     @Override
     public void setQuestion(String text) {
         this.question = text;
     }
 
+    // Getter for the title of the quiz question
     public String getTitle() {
         return title;
     }
 
+    // Getter for answer options as an array of strings
     @Override
     public String[] getOptions() {
         int i = 0;
@@ -42,6 +49,7 @@ public class QuizQuestion implements IQuizQuestion {
         return answerStrArr;
     }
 
+    // Check if the user's answer option is correct
     @Override
     public boolean isUserCorrect(int markedOption) {
         return answerList.get(markedOption).isCorrect();
@@ -56,10 +64,10 @@ public class QuizQuestion implements IQuizQuestion {
             text.append(answer.getQuestion()).append(", ").append(answer.isCorrect());
             text.append("\n");
         }
-
         return text.toString();
     }
 
+    // Getter for the question text of the quiz question
     @Override
     public String getQuestion() {
         return question;

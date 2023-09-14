@@ -6,11 +6,12 @@ import java.util.Scanner;
 
 public class TerminalQuiz implements IQuiz {
 
-    // Implementation for terminal-based quiz
+    // Variable declarations
     private String name;
     private List<IQuizQuestion> questions = new ArrayList<>();
     private int score = 0;
 
+    // Constructor
     public TerminalQuiz() {
         setName(name); // Use the setter to initialize name
     }
@@ -116,10 +117,8 @@ public class TerminalQuiz implements IQuiz {
             }
         }
 
-
         System.out.println("Thanks for playing. \n");
         endQuiz();
-
     }
 
     // End the terminal quiz and display results
@@ -139,7 +138,6 @@ public class TerminalQuiz implements IQuiz {
         } else {
             System.out.println("\nOkay. Goodbye.");
         }
-
     }
 
     // Clone the TerminalQuiz instance
@@ -155,4 +153,3 @@ public class TerminalQuiz implements IQuiz {
         return clonedQuiz;
     }
 }
-
