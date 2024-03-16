@@ -1,3 +1,4 @@
 # Design-Patterns-Final
 
-A project in the making...
+A GUI and terminal quiz project using varias design patterns.
+
